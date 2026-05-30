@@ -9,135 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="body.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="headerAndFooter.css" />
 
     <style>
-      :root {
-        --bg-color: #f5f7fa;
-        --card-bg: #ffffff;
-        --text-main: #333333;
-        --text-sub: #666666;
-        --border-color: #e0e0e0;
-        --primary-color: #1976d2;
-        --primary-hover: #0d47a1;
-        --hover-bg: #e3f2fd;
-        --badge-bg: #e0e0e0;
-        --btn-light-bg: #f9f9f9;
-        --btn-light-border: #dcdfe6;
-        --btn-light-text: #606266;
-        --key-bg: #fff8e1;
-        --key-text: #e65100;
-        --key-border: #ffb300;
-      }
-
-      [data-theme="dark"] {
-        --bg-color: #121212;
-        --card-bg: #1e1e1e;
-        --text-main: #e0e0e0;
-        --text-sub: #aaaaaa;
-        --border-color: #333333;
-        --primary-color: #90caf9;
-        --primary-hover: #64b5f6;
-        --hover-bg: #2c3e50;
-        --badge-bg: #424242;
-        --btn-light-bg: #2b2b2b;
-        --btn-light-border: #4c4c4c;
-        --btn-light-text: #cfcfcf;
-        --key-bg: #3e2723;
-        --key-text: #ffcc80;
-        --key-border: #f57c00;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        padding: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        background-color: var(--bg-color);
-        color: var(--text-main);
-        transition:
-          background-color 0.3s,
-          color 0.3s;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* Header & Title Section */
-      .controls-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-      .header-title-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-wrap: wrap;
-      }
-
-      /* Social Icons */
-      .social-links {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .social-icon {
-        color: var(--text-sub);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        border: 1px solid var(--border-color);
-        text-decoration: none;
-        transition: all 0.2s;
-        background: var(--card-bg);
-      }
-      .social-icon:hover {
-        color: var(--text-main);
-        border-color: var(--text-main);
-        background: var(--hover-bg);
-        transform: translateY(-2px);
-      }
-      .social-icon.yt:hover {
-        color: #f44336;
-        border-color: #f44336;
-        background: #ffebee;
-      }
-      [data-theme="dark"] .social-icon.yt:hover {
-        background: #4a1c1c;
-      }
-
-      .header-actions {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-
-      .action-btn {
-        background: transparent;
-        border: 1px solid var(--border-color);
-        color: var(--text-main);
-        padding: 6px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        transition: background-color 0.2s;
-      }
-      .action-btn:hover {
-        background: var(--hover-bg);
-      }
-      .action-btn.icon-only {
-        padding: 6px;
-      }
-
       .search-bar-container {
         display: flex;
         gap: 10px;
@@ -453,16 +329,6 @@
         margin-top: 40px;
         grid-column: 1 / -1;
       }
-
-      /* Footer Style */
-      .site-footer {
-        text-align: center;
-        padding: 25px 15px;
-        margin-top: 40px;
-        border-top: 1px dashed var(--border-color);
-        color: var(--text-sub);
-        font-size: 0.9em;
-      }
     </style>
     <script src="config.js"></script>
     <script src="sidebar.js"></script>
@@ -563,7 +429,6 @@
     </footer>
 
     <script>
-
       const GAS_URL = window.AppConfig.gasUrl;
 
       const i18n = {
@@ -589,7 +454,7 @@
           loading: "正在從資料庫載入資料，請稍候...",
           noData: "找不到符合的歌曲。",
           allFilter: "全部",
-          diffBtn: "難易度",
+          diffBtn: "音域",
           ytBtn: "影片",
           noLink: "無",
         },
@@ -646,7 +511,7 @@
         initTheme();
         applyI18n();
         // 新增這行：呼叫 sidebar.js 來生成側邊欄
-  window.renderSidebar();
+        window.renderSidebar();
 
         initTheme();
         applyI18n();
@@ -932,7 +797,7 @@
             }
 
             const diffUrl =
-              song["難易度"] && song["難易度"].url ? song["難易度"].url : "";
+              song["音域"] && song["音域"].url ? song["音域"].url : "";
             const ytUrl =
               song["Youtube"] && song["Youtube"].url ? song["Youtube"].url : "";
 
@@ -971,7 +836,7 @@
         });
       }
 
-      function isFuzzyMatch(text, query) {
+function isFuzzyMatch(text, query) {
         if (!query) return true;
         text = text.toLowerCase();
         query = query.toLowerCase().replace(/\s+/g, "");
@@ -981,8 +846,8 @@
           if (text[i] === query[j]) j++;
           i++;
         }
-        return j === query.length;
-      }
+        return j === normalizedQuery.length;
+    }
 
       function triggerSearch(updateGrid = true) {
         const keyword = document.getElementById("search").value.trim();

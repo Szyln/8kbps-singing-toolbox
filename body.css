@@ -1,0 +1,50 @@
+  :root {
+        --bg-color: #f5f7fa;
+        --card-bg: #ffffff;
+        --text-main: #333333;
+        --text-sub: #666666;
+        --border-color: #e0e0e0;
+        --primary-color: #1976d2;
+        --primary-hover: #0d47a1;
+        --hover-bg: #e3f2fd;
+        --badge-bg: #e0e0e0;
+        --btn-light-bg: #f9f9f9;
+        --btn-light-border: #dcdfe6;
+        --btn-light-text: #606266;
+        --key-bg: #fff8e1;
+        --key-text: #e65100;
+        --key-border: #ffb300;
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --text-main: #e0e0e0;
+        --text-sub: #aaaaaa;
+        --border-color: #333333;
+        --primary-color: #90caf9;
+        --primary-hover: #64b5f6;
+        --hover-bg: #2c3e50;
+        --badge-bg: #424242;
+        --btn-light-bg: #2b2b2b;
+        --btn-light-border: #4c4c4c;
+        --btn-light-text: #cfcfcf;
+        --key-bg: #3e2723;
+        --key-text: #ffcc80;
+        --key-border: #f57c00;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
