@@ -570,6 +570,7 @@
         color: var(--primary-color);
       }
     </style>
+    <script src="config.js"></script>
   </head>
   <body>
     <div
@@ -597,16 +598,24 @@
     </nav>
     <div class="controls-header">
       <div class="header-title-wrapper">
-        <button class="action-btn icon-only" onclick="toggleDrawer()" style="border: none; padding: 4px;" title="選單">
-        <span class="material-symbols-outlined" style="font-size: 28px;">menu</span>
-      </button>
+        <button
+          class="action-btn icon-only"
+          onclick="toggleDrawer()"
+          style="border: none; padding: 4px"
+          title="選單"
+        >
+          <span class="material-symbols-outlined" style="font-size: 28px"
+            >menu</span
+          >
+        </button>
         <h1 id="page-title" style="margin: 0; font-size: 1.8em">
           8kbps （はっせん）リスト
         </h1>
 
         <div class="social-links">
           <a
-            href="https://x.com/aquasf16"
+            href="#"
+            id="global-x-link"
             target="_blank"
             class="social-icon"
             title="X (Twitter)"
@@ -618,7 +627,8 @@
             </svg>
           </a>
           <a
-            href="https://www.youtube.com/channel/UCTuH1"
+            href="#"
+            id="global-yt-link"
             target="_blank"
             class="social-icon yt"
             title="YouTube"
@@ -681,23 +691,21 @@
     </footer>
 
     <script>
+      // --- Navigation Drawer Logic ---
+      function toggleDrawer() {
+        const drawer = document.getElementById("nav-drawer");
+        const backdrop = document.getElementById("drawer-backdrop");
 
-// --- Navigation Drawer Logic ---
-    function toggleDrawer() {
-      const drawer = document.getElementById('nav-drawer');
-      const backdrop = document.getElementById('drawer-backdrop');
-      
-      if (drawer.classList.contains('active')) {
-        drawer.classList.remove('active');
-        backdrop.classList.remove('active');
-      } else {
-        drawer.classList.add('active');
-        backdrop.classList.add('active');
+        if (drawer.classList.contains("active")) {
+          drawer.classList.remove("active");
+          backdrop.classList.remove("active");
+        } else {
+          drawer.classList.add("active");
+          backdrop.classList.add("active");
+        }
       }
-    }
 
-      const GAS_URL =
-        "https://script.google.com/macros/s/AKfycby30G5gRCP82MpnfqEjxGZUmtnE7SyPPm2jcw4_Ofkam7tvbEu4GhxCKwmwWnaa-eMu/exec";
+      const GAS_URL = window.AppConfig.gasUrl;
 
       const i18n = {
         ja: {
@@ -778,6 +786,18 @@
       async function init() {
         initTheme();
         applyI18n();
+
+        initTheme();
+        applyI18n();
+
+        // 動態綁定共用社群連結
+        const xLink = document.getElementById("global-x-link");
+        const ytLink = document.getElementById("global-yt-link");
+        if (xLink) xLink.href = window.AppConfig.xUrl;
+        if (ytLink) ytLink.href = window.AppConfig.youtubeUrl;
+
+        document.getElementById("current-year").innerText =
+          new Date().getFullYear();
 
         // 自動設定 Footer 年份
         document.getElementById("current-year").innerText =
