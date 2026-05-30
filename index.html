@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="sidebar.css">
 
     <style>
       :root {
@@ -462,140 +463,11 @@
         color: var(--text-sub);
         font-size: 0.9em;
       }
-      /* --- Navigation Drawer (Sidebar) --- */
-      /* Backdrop 遮罩 */
-      .drawer-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity 0.3s ease,
-          visibility 0.3s;
-        z-index: 2000;
-        backdrop-filter: blur(2px);
-      }
-      .drawer-backdrop.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      /* 側邊欄本體 */
-      .nav-drawer {
-        position: fixed;
-        top: 0;
-        left: -320px; /* 隱藏在畫面外 */
-        width: 280px;
-        height: 100vh;
-        background-color: var(--card-bg);
-        color: var(--text-main);
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-        z-index: 2001;
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        display: flex;
-        flex-direction: column;
-        border-radius: 0 24px 24px 0; /* Material Design 3 圓角 */
-      }
-      .nav-drawer.active {
-        transform: translateX(320px);
-      }
-
-      /* 側邊欄頭部 */
-      .drawer-header {
-        padding: 24px 16px;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .drawer-title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        margin: 0;
-        color: var(--primary-color);
-      }
-      .drawer-close-btn {
-        background: transparent;
-        border: none;
-        color: var(--text-sub);
-        cursor: pointer;
-        padding: 8px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color 0.2s;
-      }
-      .drawer-close-btn:hover {
-        background-color: var(--hover-bg);
-      }
-
-      /* 側邊欄內容/連結 */
-      .drawer-content {
-        padding: 16px 8px;
-        flex: 1;
-        overflow-y: auto;
-      }
-      .drawer-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 16px;
-        margin-bottom: 4px;
-        text-decoration: none;
-        color: var(--text-main);
-        border-radius: 100px; /* Pill-shaped 圓角 */
-        font-weight: 500;
-        transition:
-          background-color 0.2s,
-          color 0.2s;
-      }
-      .drawer-item:hover {
-        background-color: var(--hover-bg);
-      }
-      .drawer-item.active {
-        background-color: var(--hover-bg);
-        color: var(--primary-color);
-      }
-      .drawer-item .material-symbols-outlined {
-        color: var(--text-sub);
-        transition: color 0.2s;
-      }
-      .drawer-item.active .material-symbols-outlined,
-      .drawer-item:hover .material-symbols-outlined {
-        color: var(--primary-color);
-      }
     </style>
     <script src="config.js"></script>
+    <script src="sidebar.js"></script>
   </head>
   <body>
-    <div
-      class="drawer-backdrop"
-      id="drawer-backdrop"
-      onclick="toggleDrawer()"
-    ></div>
-    <nav class="nav-drawer" id="nav-drawer">
-      <div class="drawer-header">
-        <h2 class="drawer-title">Menu</h2>
-        <button class="drawer-close-btn" onclick="toggleDrawer()">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      <div class="drawer-content">
-        <a href="index.html" class="drawer-item active">
-          <span class="material-symbols-outlined">library_music</span>
-          歌える曲一覧
-        </a>
-        <a href="whichLine.html" class="drawer-item">
-          <span class="material-symbols-outlined">extension</span>
-          コードの行数表示
-        </a>
-      </div>
-    </nav>
     <div class="controls-header">
       <div class="header-title-wrapper">
         <button
@@ -691,19 +563,6 @@
     </footer>
 
     <script>
-      // --- Navigation Drawer Logic ---
-      function toggleDrawer() {
-        const drawer = document.getElementById("nav-drawer");
-        const backdrop = document.getElementById("drawer-backdrop");
-
-        if (drawer.classList.contains("active")) {
-          drawer.classList.remove("active");
-          backdrop.classList.remove("active");
-        } else {
-          drawer.classList.add("active");
-          backdrop.classList.add("active");
-        }
-      }
 
       const GAS_URL = window.AppConfig.gasUrl;
 
@@ -786,6 +645,8 @@
       async function init() {
         initTheme();
         applyI18n();
+        // 新增這行：呼叫 sidebar.js 來生成側邊欄
+  window.renderSidebar();
 
         initTheme();
         applyI18n();
@@ -1224,6 +1085,7 @@
         currentLang = currentLang === "ja" ? "zh" : "ja";
         localStorage.setItem("appLang", currentLang);
         applyI18n();
+        window.updateSidebarLanguage();
         renderDynamicFilters();
         if (allSongs.length > 0) processAndRender();
       }
