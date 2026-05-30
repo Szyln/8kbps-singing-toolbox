@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8kbps （はっせん）リスト</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #f5f7fa;
+        --card-bg: #ffffff;
+        --text-main: #333333;
+        --text-sub: #666666;
+        --border-color: #e0e0e0;
+        --primary-color: #1976d2;
+        --primary-hover: #0d47a1;
+        --hover-bg: #e3f2fd;
+        --badge-bg: #e0e0e0;
+        --btn-light-bg: #f9f9f9;
+        --btn-light-border: #dcdfe6;
+        --btn-light-text: #606266;
+        --key-bg: #fff8e1;
+        --key-text: #e65100;
+        --key-border: #ffb300;
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --text-main: #e0e0e0;
+        --text-sub: #aaaaaa;
+        --border-color: #333333;
+        --primary-color: #90caf9;
+        --primary-hover: #64b5f6;
+        --hover-bg: #2c3e50;
+        --badge-bg: #424242;
+        --btn-light-bg: #2b2b2b;
+        --btn-light-border: #4c4c4c;
+        --btn-light-text: #cfcfcf;
+        --key-bg: #3e2723;
+        --key-text: #ffcc80;
+        --key-border: #f57c00;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Header & Title Section */
+      .controls-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .header-title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      /* Social Icons */
+      .social-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .social-icon {
+        color: var(--text-sub);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid var(--border-color);
+        text-decoration: none;
+        transition: all 0.2s;
+        background: var(--card-bg);
+      }
+      .social-icon:hover {
+        color: var(--text-main);
+        border-color: var(--text-main);
+        background: var(--hover-bg);
+        transform: translateY(-2px);
+      }
+      .social-icon.yt:hover {
+        color: #f44336;
+        border-color: #f44336;
+        background: #ffebee;
+      }
+      [data-theme="dark"] .social-icon.yt:hover {
+        background: #4a1c1c;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .action-btn {
+        background: transparent;
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: background-color 0.2s;
+      }
+      .action-btn:hover {
+        background: var(--hover-bg);
+      }
+      .action-btn.icon-only {
+        padding: 6px;
+      }
+
+      .search-bar-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+
+      .search-wrapper {
+        position: relative;
+        flex: 1;
+        min-width: 250px;
+      }
+      #search {
+        width: 100%;
+        height: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: var(--card-bg);
+        color: var(--text-main);
+      }
+      #search:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      .candidates-dropdown {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        max-height: 250px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        display: none;
+      }
+      .candidate-item {
+        padding: 10px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .candidate-item:last-child {
+        border-bottom: none;
+      }
+      .candidate-item:hover {
+        background: var(--hover-bg);
+      }
+      .candidate-title {
+        font-weight: bold;
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 2px;
+      }
+      .candidate-author {
+        font-size: 0.85em;
+        color: var(--text-sub);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .view-toggle-btn {
+        padding: 8px 16px;
+        background: transparent;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: bold;
+        font-size: 15px;
+        white-space: nowrap;
+        transition: background-color 0.2s;
+      }
+      .view-toggle-btn:hover {
+        background: var(--hover-bg);
+      }
+
+      .filter-group {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+      }
+      .filter-btn {
+        padding: 6px 12px;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
+        color: var(--text-sub);
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 13px;
+        white-space: nowrap;
+        transition: all 0.2s;
+      }
+      .filter-btn:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+      .filter-btn.active {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+      }
+
+      .tabs-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 2px solid var(--border-color);
+        margin-bottom: 25px;
+      }
+      .tabs-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+        padding-bottom: 0;
+        flex: 1;
+      }
+      .tabs-container::-webkit-scrollbar {
+        height: 4px;
+      }
+      .tabs-container::-webkit-scrollbar-thumb {
+        background: var(--border-color);
+        border-radius: 4px;
+      }
+
+      .tab-btn {
+        padding: 10px 18px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        color: var(--text-sub);
+        white-space: nowrap;
+        border-radius: 8px 8px 0 0;
+        transition: all 0.2s;
+      }
+      .tab-btn:hover {
+        color: var(--primary-color);
+        background: var(--hover-bg);
+      }
+      .tab-btn.active {
+        color: var(--primary-color);
+        border-bottom: 3px solid var(--primary-color);
+        background: var(--hover-bg);
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 20px;
+        align-items: start;
+        flex: 1;
+      }
+
+      .group-card {
+        background: var(--card-bg);
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border: 1px solid var(--border-color);
+      }
+      .group-title {
+        font-size: 1.1em;
+        color: var(--text-main);
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 8px;
+        margin-top: 0;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .song-list {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .song-item {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 12px;
+        border-bottom: 1px dashed var(--border-color);
+      }
+      .song-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .song-title-wrapper {
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .song-link {
+        text-decoration: none;
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 1.15em;
+        line-height: 1.3;
+        word-break: break-word;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .song-link:hover {
+        text-decoration: underline;
+        color: var(--primary-hover);
+      }
+      .song-link.disabled {
+        color: var(--text-main);
+        pointer-events: none;
+      }
+      .material-symbols-outlined {
+        font-size: 18px;
+        vertical-align: middle;
+      }
+
+      .key-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 10px;
+        border: 2px solid var(--key-border);
+        border-radius: 8px;
+        font-size: 0.9em;
+        font-weight: 900;
+        color: var(--key-text);
+        background-color: var(--key-bg);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .song-meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .subtext-area {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        min-width: 150px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.8em;
+        font-weight: bold;
+        white-space: nowrap;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      .badge-genre {
+        background-color: var(--badge-bg);
+        color: var(--text-main);
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 8px;
+      }
+      .icon-btn {
+        text-decoration: none;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: bold;
+        background-color: var(--btn-light-bg);
+        color: var(--btn-light-text);
+        border: 1px solid var(--btn-light-border);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition:
+          background-color 0.2s,
+          opacity 0.2s;
+      }
+      .icon-btn:hover {
+        background-color: var(--border-color);
+      }
+      .icon-btn.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      #loading {
+        text-align: center;
+        color: var(--text-sub);
+        font-size: 1.2em;
+        margin-top: 40px;
+        grid-column: 1 / -1;
+      }
+
+      /* Footer Style */
+      .site-footer {
+        text-align: center;
+        padding: 25px 15px;
+        margin-top: 40px;
+        border-top: 1px dashed var(--border-color);
+        color: var(--text-sub);
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls-header">
+      <div class="header-title-wrapper">
+        <h1 id="page-title" style="margin: 0; font-size: 1.8em">
+        8kbps （はっせん）リスト
+        </h1>
+
+        <div class="social-links">
+          <a
+            href="https://x.com/aquasf16"
+            target="_blank"
+            class="social-icon"
+            title="X (Twitter)"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UCTuH1"
+            target="_blank"
+            class="social-icon yt"
+            title="YouTube"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path
+                d="M21.582 6.186a2.684 2.684 0 0 0-1.884-1.895C17.973 3.846 12 3.846 12 3.846s-5.973 0-7.698.445a2.684 2.684 0 0 0-1.884 1.895C1.964 7.915 1.964 12 1.964 12s0 4.085.454 5.814a2.684 2.684 0 0 0 1.884 1.895c1.725.445 7.698.445 7.698.445s5.973 0 7.698-.445a2.684 2.684 0 0 0 1.884-1.895c.454-1.729.454-5.814.454-5.814s0-4.085-.454-5.814zM9.96 15.485V8.515L15.96 12l-6 3.485z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button
+          class="action-btn icon-only"
+          onclick="toggleTheme()"
+          title="切換深淺色"
+        >
+          <span class="material-symbols-outlined" id="theme-icon"
+            >dark_mode</span
+          >
+        </button>
+        <button class="action-btn" onclick="toggleLang()">
+          <span class="material-symbols-outlined">translate</span>
+          <span id="lang-btn-text">中文</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="search-bar-container">
+      <div class="search-wrapper">
+        <input
+          type="text"
+          id="search"
+          placeholder="曲名、作者で検索..."
+          autocomplete="off"
+        />
+        <div id="search-candidates" class="candidates-dropdown"></div>
+      </div>
+      <button class="view-toggle-btn" onclick="toggleViewMode()">
+        <span class="material-symbols-outlined">swap_horiz</span>
+        <span id="view-toggle-text">完成度別へ切替</span>
+      </button>
+    </div>
+
+    <div class="filter-group" id="dynamic-filters"></div>
+
+    <div class="tabs-wrapper">
+      <div id="tabs" class="tabs-container"></div>
+    </div>
+
+    <div id="app" class="grid-container">
+      <div id="loading">データベースから読み込み中...</div>
+    </div>
+
+    <footer class="site-footer">
+      &copy; <span id="current-year">2026</span> Song List Database. All rights
+      reserved.
+    </footer>
+
+    <script>
+      const GAS_URL =
+        "https://script.google.com/macros/s/AKfycby30G5gRCP82MpnfqEjxGZUmtnE7SyPPm2jcw4_Ofkam7tvbEu4GhxCKwmwWnaa-eMu/exec";
+
+      const i18n = {
+        ja: {
+          title: "8kbps （はっせん）リスト",
+          searchPlaceholder: "曲名、作者で検索...",
+          switchToCompletion: "完成度別へ",
+          switchToGenre: "ジャンル別へ",
+          langBtn: "中文",
+          loading: "データベースから読み込み中...",
+          noData: "条件に一致する曲がありません。",
+          allFilter: "すべて",
+          diffBtn: "音域",
+          ytBtn: "動画",
+          noLink: "リンクなし",
+        },
+        zh: {
+          title: "8kbps （はっせん）歌單",
+          searchPlaceholder: "搜尋曲名、作者...",
+          switchToCompletion: "切換為完成度分類",
+          switchToGenre: "切換為類型分類",
+          langBtn: "日本語",
+          loading: "正在從資料庫載入資料，請稍候...",
+          noData: "找不到符合的歌曲。",
+          allFilter: "全部",
+          diffBtn: "難易度",
+          ytBtn: "影片",
+          noLink: "無",
+        },
+      };
+
+      let currentLang = localStorage.getItem("appLang") || "ja";
+      let viewMode = "genre";
+
+      let allSongs = [];
+      let filteredSongs = [];
+
+      let parsedData = {};
+      let tabList = [];
+      let currentTab = "";
+
+      let availableCompletions = new Set();
+      let availableGenres = new Set();
+
+      let selectedCompletionFilters = [];
+      let selectedGenreFilter = "all";
+
+      function getCompLevel(compStr) {
+        const match = compStr.match(/^(\d+)/);
+        return match ? parseInt(match[1], 10) : -1;
+      }
+
+      function initTheme() {
+        const savedTheme = localStorage.getItem("appTheme");
+        let isDark;
+        if (savedTheme) {
+          isDark = savedTheme === "dark";
+        } else {
+          isDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+        }
+        const themeToSet = isDark ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", themeToSet);
+        document.getElementById("theme-icon").innerText = isDark
+          ? "light_mode"
+          : "dark_mode";
+      }
+
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute("data-theme");
+        const target = current === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", target);
+        document.getElementById("theme-icon").innerText =
+          target === "dark" ? "light_mode" : "dark_mode";
+        localStorage.setItem("appTheme", target);
+      }
+
+      async function init() {
+        initTheme();
+        applyI18n();
+
+        // 自動設定 Footer 年份
+        document.getElementById("current-year").innerText =
+          new Date().getFullYear();
+
+        try {
+          const response = await fetch(GAS_URL);
+          allSongs = await response.json();
+
+          allSongs.forEach((song) => {
+            if (song["完成度"] && song["完成度"].text.trim() !== "") {
+              availableCompletions.add(song["完成度"].text.trim());
+            }
+            if (song["ジャンル"] && song["ジャンル"].text.trim() !== "") {
+              const genres = song["ジャンル"].text
+                .split(/[,、]/)
+                .map((g) => g.trim())
+                .filter(Boolean);
+              genres.forEach((g) => availableGenres.add(g));
+            }
+          });
+
+          initDefaultCompletionFilters();
+          renderDynamicFilters();
+          triggerSearch();
+        } catch (error) {
+          console.error(error);
+          document.getElementById("loading").innerHTML =
+            `<span style="color:red;">API 載入失敗，請確認網址。</span>`;
+        }
+      }
+
+      function initDefaultCompletionFilters() {
+        selectedCompletionFilters = [];
+        availableCompletions.forEach((comp) => {
+          if (getCompLevel(comp) >= 4) {
+            selectedCompletionFilters.push(comp);
+          }
+        });
+        if (
+          selectedCompletionFilters.length === 0 ||
+          selectedCompletionFilters.length === availableCompletions.size
+        ) {
+          selectedCompletionFilters = Array.from(availableCompletions);
+        }
+      }
+
+      function processAndRender() {
+        parsedData = {};
+        const tabSet = new Set();
+
+        filteredSongs.forEach((song) => {
+          const genresRaw =
+            song["ジャンル"] && song["ジャンル"].text.trim() !== ""
+              ? song["ジャンル"].text
+              : "未分類";
+          const authorsRaw =
+            song["作者"] && song["作者"].text.trim() !== ""
+              ? song["作者"].text
+              : "未分類";
+          const compRaw =
+            song["完成度"] && song["完成度"].text.trim() !== ""
+              ? song["完成度"].text
+              : "未設定";
+
+          const genres = genresRaw
+            .split(/[,、]/)
+            .map((g) => g.trim())
+            .filter(Boolean);
+          const authors = authorsRaw
+            .split(/[,、]/)
+            .map((a) => a.trim())
+            .filter(Boolean);
+
+          if (viewMode === "genre") {
+            genres.forEach((genre) => {
+              tabSet.add(genre);
+              if (!parsedData[genre]) parsedData[genre] = {};
+              authors.forEach((author) => {
+                if (!parsedData[genre][author]) parsedData[genre][author] = [];
+                parsedData[genre][author].push(song);
+              });
+            });
+          } else {
+            tabSet.add(compRaw);
+            if (!parsedData[compRaw]) parsedData[compRaw] = {};
+            authors.forEach((author) => {
+              if (!parsedData[compRaw][author])
+                parsedData[compRaw][author] = [];
+              parsedData[compRaw][author].push(song);
+            });
+          }
+        });
+
+        tabList = Array.from(tabSet);
+        if (viewMode === "genre") {
+          tabList.sort();
+        } else {
+          tabList.sort((a, b) => b.localeCompare(a));
+        }
+
+        if (tabList.length > 0) {
+          if (!tabList.includes(currentTab)) {
+            currentTab = tabList[0];
+          }
+
+          for (const t in parsedData) {
+            for (const sub in parsedData[t]) {
+              if (viewMode === "genre") {
+                parsedData[t][sub].sort((a, b) => {
+                  const cA = a["完成度"] ? String(a["完成度"].text) : "";
+                  const cB = b["完成度"] ? String(b["完成度"].text) : "";
+                  return cB.localeCompare(cA);
+                });
+              } else {
+                parsedData[t][sub].sort((a, b) => {
+                  const gA = a["ジャンル"] ? String(a["ジャンル"].text) : "";
+                  const gB = b["ジャンル"] ? String(b["ジャンル"].text) : "";
+                  return gA.localeCompare(gB);
+                });
+              }
+            }
+          }
+
+          document.getElementById("tabs").style.display = "flex";
+          renderTabs();
+          renderGrid(parsedData[currentTab]);
+        } else {
+          document.getElementById("tabs").style.display = "none";
+          document.getElementById("app").innerHTML =
+            `<div id="loading">${i18n[currentLang].noData}</div>`;
+        }
+      }
+
+      function renderTabs() {
+        const tabsDiv = document.getElementById("tabs");
+        tabsDiv.innerHTML = "";
+
+        tabList.forEach((tabName) => {
+          const btn = document.createElement("button");
+          btn.className = `tab-btn ${tabName === currentTab ? "active" : ""}`;
+          btn.textContent = tabName;
+          btn.onclick = () => {
+            currentTab = tabName;
+            renderTabs();
+            renderGrid(parsedData[currentTab]);
+          };
+          tabsDiv.appendChild(btn);
+        });
+      }
+
+      let isSingleSelectMode = false;
+      let lastClickedLevel = -1;
+
+      function renderDynamicFilters() {
+        const container = document.getElementById("dynamic-filters");
+        container.innerHTML = "";
+
+        if (viewMode === "genre") {
+          const sortedComps = Array.from(availableCompletions).sort((a, b) =>
+            b.localeCompare(a),
+          );
+
+          sortedComps.forEach((comp) => {
+            const isSelected = selectedCompletionFilters.includes(comp);
+            const btn = document.createElement("button");
+            btn.className = `filter-btn ${isSelected ? "active" : ""}`;
+            btn.textContent = comp;
+
+            btn.onclick = () => {
+              const clickedLevel = getCompLevel(comp);
+              selectedCompletionFilters = [];
+
+              if (clickedLevel === lastClickedLevel && !isSingleSelectMode) {
+                isSingleSelectMode = true;
+                selectedCompletionFilters = [comp];
+              } else {
+                isSingleSelectMode = false;
+                lastClickedLevel = clickedLevel;
+
+                availableCompletions.forEach((c) => {
+                  if (getCompLevel(c) >= clickedLevel) {
+                    selectedCompletionFilters.push(c);
+                  }
+                });
+              }
+
+              triggerSearch();
+              renderDynamicFilters();
+            };
+            container.appendChild(btn);
+          });
+        } else {
+          const allBtn = document.createElement("button");
+          allBtn.className = `filter-btn ${selectedGenreFilter === "all" ? "active" : ""}`;
+          allBtn.textContent = i18n[currentLang].allFilter;
+          allBtn.onclick = () => {
+            selectedGenreFilter = "all";
+            triggerSearch();
+            renderDynamicFilters();
+          };
+          container.appendChild(allBtn);
+
+          const sortedGenres = Array.from(availableGenres).sort();
+          sortedGenres.forEach((item) => {
+            const btn = document.createElement("button");
+            btn.className = `filter-btn ${selectedGenreFilter === item ? "active" : ""}`;
+            btn.textContent = item;
+            btn.onclick = () => {
+              selectedGenreFilter = item;
+              triggerSearch();
+              renderDynamicFilters();
+            };
+            container.appendChild(btn);
+          });
+        }
+      }
+
+      function renderGrid(groupData) {
+        const app = document.getElementById("app");
+        app.innerHTML = "";
+
+        if (!groupData) return;
+
+        const subGroups = Object.keys(groupData).sort();
+
+        subGroups.forEach((subGroupName) => {
+          const card = document.createElement("div");
+          card.className = "group-card";
+          card.innerHTML = `<h3 class="group-title"><span class="material-symbols-outlined">person</span> ${subGroupName}</h3>`;
+
+          const ul = document.createElement("ul");
+          ul.className = "song-list";
+
+          groupData[subGroupName].forEach((song) => {
+            const title = song["曲名"].text;
+
+            let mainUrl = "";
+            if (song["コード"] && song["コード"].text.trim() !== "") {
+              mainUrl = song["コード"].url || "";
+            } else if (song["横断検索"]) {
+              mainUrl = song["横断検索"].url || "";
+            }
+
+            const songLinkHTML = mainUrl
+              ? `<a href="${mainUrl}" target="_blank" class="song-link"><span class="material-symbols-outlined">music_note</span>${title}</a>`
+              : `<span class="song-link disabled"><span class="material-symbols-outlined">music_note</span>${title}</span>`;
+
+            const keyText = song["Key"] ? String(song["Key"].text).trim() : "";
+            let keyBadgeHTML = "";
+            if (keyText !== "0" && keyText !== "") {
+              let keyNum = Number(keyText);
+              let displayKey = keyText;
+              if (!isNaN(keyNum) && keyNum > 0 && !keyText.startsWith("+")) {
+                displayKey = "+" + keyText;
+              }
+              keyBadgeHTML = `<span class="key-badge">${displayKey}</span>`;
+            }
+
+            let badgeHTML = "";
+            if (viewMode === "genre") {
+              const compText = song["完成度"] ? song["完成度"].text : "";
+              if (compText) {
+                badgeHTML = `<span class="badge badge-genre">${compText}</span>`;
+              }
+            } else {
+              const genreText = song["ジャンル"] ? song["ジャンル"].text : "";
+              if (genreText) {
+                badgeHTML = `<span class="badge badge-genre">${genreText}</span>`;
+              }
+            }
+
+            const diffUrl =
+              song["難易度"] && song["難易度"].url ? song["難易度"].url : "";
+            const ytUrl =
+              song["Youtube"] && song["Youtube"].url ? song["Youtube"].url : "";
+
+            const txt = i18n[currentLang];
+            const diffBtnHTML = diffUrl
+              ? `<a href="${diffUrl}" target="_blank" class="icon-btn"><span class="material-symbols-outlined">equalizer</span>${txt.diffBtn}</a>`
+              : `<span class="icon-btn disabled"><span class="material-symbols-outlined">equalizer</span>${txt.noLink}</span>`;
+
+            const ytBtnHTML = ytUrl
+              ? `<a href="${ytUrl}" target="_blank" class="icon-btn"><span class="material-symbols-outlined">smart_display</span>${txt.ytBtn}</a>`
+              : `<span class="icon-btn disabled"><span class="material-symbols-outlined">smart_display</span>${txt.noLink}</span>`;
+
+            const li = document.createElement("li");
+            li.className = "song-item";
+
+            li.innerHTML = `
+            <div class="song-title-wrapper">
+              ${songLinkHTML}
+              ${keyBadgeHTML}
+            </div>
+            <div class="song-meta-row">
+              <div class="subtext-area">
+                ${badgeHTML}
+              </div>
+              <div class="btn-group">
+                ${diffBtnHTML}
+                ${ytBtnHTML}
+              </div>
+            </div>
+          `;
+            ul.appendChild(li);
+          });
+
+          card.appendChild(ul);
+          app.appendChild(card);
+        });
+      }
+
+      function isFuzzyMatch(text, query) {
+        if (!query) return true;
+        text = text.toLowerCase();
+        query = query.toLowerCase().replace(/\s+/g, "");
+        let i = 0,
+          j = 0;
+        while (i < text.length && j < query.length) {
+          if (text[i] === query[j]) j++;
+          i++;
+        }
+        return j === query.length;
+      }
+
+      function triggerSearch(updateGrid = true) {
+        const keyword = document.getElementById("search").value.trim();
+
+        filteredSongs = allSongs.filter((song) => {
+          const title = song["曲名"] ? song["曲名"].text : "";
+          const author = song["作者"] ? song["作者"].text : "";
+
+          const matchSearch =
+            isFuzzyMatch(title, keyword) || isFuzzyMatch(author, keyword);
+
+          let matchFilter = true;
+          if (viewMode === "genre") {
+            const comp = song["完成度"] ? song["完成度"].text.trim() : "";
+            matchFilter = selectedCompletionFilters.includes(comp);
+          } else {
+            if (selectedGenreFilter !== "all") {
+              const genresRaw = song["ジャンル"] ? song["ジャンル"].text : "";
+              const genres = genresRaw.split(/[,、]/).map((g) => g.trim());
+              matchFilter = genres.includes(selectedGenreFilter);
+            }
+          }
+
+          return matchSearch && matchFilter;
+        });
+
+        if (updateGrid) processAndRender();
+      }
+
+      function renderCandidates(keyword) {
+        const dropdown = document.getElementById("search-candidates");
+        if (!keyword) {
+          dropdown.style.display = "none";
+          return;
+        }
+
+        const matches = filteredSongs.slice(0, 50);
+        if (matches.length === 0) {
+          dropdown.style.display = "none";
+          return;
+        }
+
+        dropdown.innerHTML = "";
+        matches.forEach((song) => {
+          const title = song["曲名"] ? song["曲名"].text : "";
+          const author = song["作者"] ? song["作者"].text : "";
+
+          const div = document.createElement("div");
+          div.className = "candidate-item";
+          div.innerHTML = `
+             <span class="candidate-title">${title}</span>
+             <span class="candidate-author"><span class="material-symbols-outlined" style="font-size:14px;">person</span> ${author}</span>
+           `;
+
+          div.onclick = () => {
+            document.getElementById("search").value = title;
+            dropdown.style.display = "none";
+            triggerSearch();
+          };
+          dropdown.appendChild(div);
+        });
+        dropdown.style.display = "block";
+      }
+
+      document.getElementById("search").addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        triggerSearch(true);
+        renderCandidates(val);
+      });
+
+      document.getElementById("search").addEventListener("focus", (e) => {
+        const val = e.target.value.trim();
+        if (val) renderCandidates(val);
+      });
+
+      document.addEventListener("click", (e) => {
+        const wrapper = document.querySelector(".search-wrapper");
+        if (wrapper && !wrapper.contains(e.target)) {
+          document.getElementById("search-candidates").style.display = "none";
+        }
+      });
+
+      function toggleViewMode() {
+        viewMode = viewMode === "genre" ? "completion" : "genre";
+
+        selectedGenreFilter = "all";
+        initDefaultCompletionFilters();
+        isSingleSelectMode = false;
+        lastClickedLevel = -1;
+
+        const txt = i18n[currentLang];
+        document.getElementById("view-toggle-text").innerText =
+          viewMode === "genre" ? txt.switchToCompletion : txt.switchToGenre;
+
+        triggerSearch();
+        renderDynamicFilters();
+      }
+
+      function toggleLang() {
+        currentLang = currentLang === "ja" ? "zh" : "ja";
+        localStorage.setItem("appLang", currentLang);
+        applyI18n();
+        renderDynamicFilters();
+        if (allSongs.length > 0) processAndRender();
+      }
+
+      function applyI18n() {
+        const txt = i18n[currentLang];
+        document.getElementById("page-title").innerText = txt.title;
+        document.getElementById("search").placeholder = txt.searchPlaceholder;
+        document.getElementById("lang-btn-text").innerText = txt.langBtn;
+
+        const viewBtn = document.getElementById("view-toggle-text");
+        if (viewBtn) {
+          viewBtn.innerText =
+            viewMode === "genre" ? txt.switchToCompletion : txt.switchToGenre;
+        }
+
+        const loading = document.getElementById("loading");
+        if (loading && allSongs.length === 0) {
+          loading.innerText = txt.loading;
+        }
+      }
+
+      init();
+    </script>
+  </body>
+</html>
