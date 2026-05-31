@@ -88,16 +88,84 @@
 }
 
 .drawerItem.active {
-  background: var(--border-color); /* Fallback */
+  background: color-mix(in srgb, var(--primary-color) 12%, transparent);
+  color: var(--primary-color);
   font-weight: bold;
 }
 
+/* For button-style drawerItems */
+.drawerItem {
+  width: calc(100% - 16px);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
 .drawerFooter {
-  padding: 20px;
+  padding: 16px 20px;
   border-top: 1px solid var(--border-color);
   display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.socialIcon {
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 15px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  transition: all 0.2s;
+  background: var(--card-bg);
+  flex-shrink: 0;
+}
+
+.socialIcon:hover {
+  color: var(--text-main);
+  border-color: var(--text-main);
+  background: var(--hover-bg);
+  transform: translateY(-2px);
+}
+
+.socialIcon.yt:hover {
+  color: #f44336;
+  border-color: #f44336;
+  background: #ffebee;
+}
+
+:global([data-theme="dark"]) .socialIcon.yt:hover {
+  background: #4a1c1c;
+}
+
+.footerActions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.footerBtn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  transition: background-color 0.2s;
+}
+
+.footerBtn:hover {
+  background: var(--hover-bg);
 }
 
 .categoryTitle {
@@ -107,4 +175,26 @@
   text-transform: uppercase;
   margin: 10px 20px 5px;
   letter-spacing: 0.05em;
+}
+
+.subCategoryTitle {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin: 8px 28px 2px;
+  opacity: 0.75;
+  letter-spacing: 0.03em;
+}
+
+.userItem {
+  padding: 9px 16px 9px 28px;
+}
+
+.userIcon {
+  font-size: 1.1em !important;
+  transition: color 0.15s;
+}
+
+.drawerItem.active .userIcon {
+  color: var(--primary-color);
 }

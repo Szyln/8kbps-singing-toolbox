@@ -3,6 +3,11 @@
   "error": {
     "fetchFailed": "楽曲データの取得に失敗しました。ネットワーク接続を確認するか、後でお試しください。"
   },
+  "header": {
+    "listTitle": "{{userIds}} の曲一覧",
+    "whichLineTitle": "行数表示ツール",
+    "homeTitle": "演奏ツール"
+  },
   "list": {
     "title": "曲一覧",
     "viewing": "現在表示中の User ID：",
@@ -12,6 +17,8 @@
   "sidebar": {
     "menuHome": "レパートリー検索",
     "menuTool": "行数表示ツール",
+    "userCategory": "User",
+    "singerCategory": "Singer",
     "playerCategory": "Player",
     "toolCategory": "Tool"
   },

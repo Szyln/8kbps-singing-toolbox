@@ -14,4 +14,6 @@ export interface SongItem {
   "音域"?: SongField;
   "Youtube"?: SongField;
   "User"?: SongField;
+  "Singer"?: SongField;
+  "Player"?: SongField;
 }

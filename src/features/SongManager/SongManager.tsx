@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { SongItem } from '../../types/Song';
 import SearchBar from './components/SearchBar/SearchBar';
@@ -6,6 +7,7 @@ import Filters from './components/Filters/Filters';
 import Tabs from './components/Tabs/Tabs';
 import SongCard from './components/SongCard/SongCard';
 import { isFuzzyMatch, getCompLevel } from '../../utils/search';
+import { parseUserIds } from '../../utils/users';
 import styles from './SongManager.module.css';
 
 interface SongManagerProps {
@@ -14,6 +16,12 @@ interface SongManagerProps {
 
 export default function SongManager({ songs }: SongManagerProps) {
   const { t } = useTranslation();
+  const { userIds: userIdsParam } = useParams<{ userIds: string }>();
+
+  const currentUserIds = useMemo(() => 
+    userIdsParam ? parseUserIds(userIdsParam) : [], 
+    [userIdsParam]
+  );
   
   const [viewMode, setViewMode] = useState<'genre' | 'completion'>('genre');
   const [searchQuery, setSearchQuery] = useState('');
@@ -88,6 +96,22 @@ export default function SongManager({ songs }: SongManagerProps) {
       
       const matchSearch = isFuzzyMatch(title, searchQuery) || isFuzzyMatch(author, searchQuery);
       
+      // User Filter Logic: 檢查歌曲的 Singer 或 Player 是否包含所有選取的 User
+      let matchUser = true;
+      if (currentUserIds.length > 0) {
+        const songUsers = new Set<string>();
+        (['Singer', 'Player'] as const).forEach(f => {
+          const raw = song[f]?.text?.trim();
+          if (raw) {
+            raw.split(/[,、]/)
+              .map(u => u.trim())
+              .filter(Boolean)
+              .forEach(u => songUsers.add(u));
+          }
+        });
+        matchUser = currentUserIds.every(id => songUsers.has(id));
+      }
+
       let matchFilter = true;
       if (viewMode === 'genre') {
         const comp = song['完成度']?.text?.trim() || '';
@@ -100,9 +124,9 @@ export default function SongManager({ songs }: SongManagerProps) {
         }
       }
       
-      return matchSearch && matchFilter;
+      return matchSearch && matchFilter && matchUser;
     });
-  }, [songs, searchQuery, viewMode, selectedCompletions, selectedGenre]);
+  }, [songs, searchQuery, viewMode, selectedCompletions, selectedGenre, currentUserIds]);
 
   // 群組與排序
   const { tabList, parsedData } = useMemo(() => {

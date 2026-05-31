@@ -28,49 +28,6 @@
   font-size: 1.8em;
 }
 
-.socialLinks {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.socialIcon {
-  color: var(--text-sub);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-  text-decoration: none;
-  transition: all 0.2s;
-  background: var(--card-bg);
-}
-
-.socialIcon:hover {
-  color: var(--text-main);
-  border-color: var(--text-main);
-  background: var(--hover-bg);
-  transform: translateY(-2px);
-}
-
-.socialIcon.yt:hover {
-  color: #f44336;
-  border-color: #f44336;
-  background: #ffebee;
-}
-
-:global([data-theme="dark"]) .socialIcon.yt:hover {
-  background: #4a1c1c;
-}
-
-.headerActions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
 .actionBtn {
   background: transparent;
   border: 1px solid var(--border-color);

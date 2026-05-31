@@ -26,7 +26,8 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: ":userId/list",
+        // userIds supports comma-separated values: /Alice,Bob/list
+        path: ":userIds/list",
         element: <List />,
       },
       {

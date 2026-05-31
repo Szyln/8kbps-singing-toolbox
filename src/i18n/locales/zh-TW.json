@@ -3,6 +3,11 @@
   "error": {
     "fetchFailed": "無法獲取歌曲資料，請檢查網路連線或稍後再試。"
   },
+  "header": {
+    "listTitle": "{{userIds}} 的清單",
+    "whichLineTitle": "行數顯示工具",
+    "homeTitle": "演奏工具箱"
+  },
   "list": {
     "title": "使用者清單頁面",
     "viewing": "目前正在查看的 User ID：",
@@ -12,6 +17,8 @@
   "sidebar": {
     "menuHome": "歌曲一覽",
     "menuTool": "顯示行數工具",
+    "userCategory": "User",
+    "singerCategory": "Singer",
     "playerCategory": "Player",
     "toolCategory": "Tool"
   },
@@ -37,7 +44,7 @@
     "troubleL4": "點擊「刪除」按鈕。"
   },
   "home": {
-    "title": "歡迎來到 Utaeru Kyoku Render",
+    "title": "歡迎來到演奏工具箱",
     "description": "請輸入 User ID 以查看對應使用者的清單：",
     "placeholder": "例如: user123",
     "submit": "前往清單"
