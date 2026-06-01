@@ -61,7 +61,7 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
   const isWhichLinePage = location.pathname === '/tool/which-line';
 
   // Combined users for "User" filter
-  const allUsers = songs ? extractUsersFromSongs(songs, 'User') : [];
+  const allUsers = songs ? extractUsersFromSongs(songs) : [];
 
   // Filtered users based on search query
   const filteredUsers = allUsers.filter(u => 

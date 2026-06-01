@@ -27,23 +27,15 @@ export function buildUserIdsPath(selected: string[]): string {
 }
 
 /**
- * Extract unique user names from a specific field (Singer or Player) across all songs.
+ * Extract unique user names from the "User" field across all songs.
  */
-export function extractUsersFromSongs(
-  songs: SongItem[],
-  field: 'Singer' | 'Player' | 'User'
-): string[] {
+export function extractUsersFromSongs(songs: SongItem[]): string[] {
   const set = new Set<string>();
   songs.forEach(song => {
-    const fields: ('Singer' | 'Player')[] = 
-      field === 'User' ? ['Singer', 'Player'] : [field as 'Singer' | 'Player'];
-
-    fields.forEach(f => {
-      const raw = song[f]?.text?.trim();
-      if (raw) {
-        raw.split(/[,、]/).map(u => u.trim()).filter(Boolean).forEach(u => set.add(u));
-      }
-    });
+    const raw = song['User']?.text?.trim();
+    if (raw) {
+      raw.split(/[,、]/).map(u => u.trim()).filter(Boolean).forEach(u => set.add(u));
+    }
   });
   return Array.from(set).sort();
 }
