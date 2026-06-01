@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSongs } from '../../hooks/useSongs';
+import SearchBar from '../../features/SongManager/components/SearchBar/SearchBar';
 import {
   extractUsersFromSongs,
   parseUserIds,
   buildUserIdsPath,
   toggleUser,
 } from '../../utils/users';
+import { isFuzzyMatch } from '../../utils/search';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {
@@ -24,6 +26,7 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
   const location = useLocation();
   const navigate = useNavigate();
   const { data: songs } = useSongs();
+  const [userSearchQuery, setUserSearchQuery] = useState('');
 
   // Pin functionality state
   const [isPinned, setIsPinned] = useState(() => {
@@ -58,9 +61,12 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
   const isWhichLinePage = location.pathname === '/tool/which-line';
 
   // Combined users for "User" filter
-  const singers = songs ? extractUsersFromSongs(songs, 'Singer') : [];
-  const players = songs ? extractUsersFromSongs(songs, 'Player') : [];
   const allUsers = songs ? extractUsersFromSongs(songs, 'User') : [];
+
+  // Filtered users based on search query
+  const filteredUsers = allUsers.filter(u => 
+    isFuzzyMatch(u, userSearchQuery)
+  );
 
   // Handle toggling a user selection: updates URL
   const handleToggleUser = (userId: string) => {
@@ -91,9 +97,6 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
         className={`${styles.drawerItem} ${styles.userItem} ${selected ? styles.active : ''}`}
         onClick={() => handleToggleUser(u)}
       >
-        <span className={`material-symbols-outlined ${styles.userIcon}`}>
-          {selected ? 'check_circle' : 'radio_button_unchecked'}
-        </span>
         <span>{u}</span>
       </button>
     );
@@ -124,30 +127,26 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
           {/* ── User 大類 ── */}
           <div className={styles.categoryTitle}>{t('sidebar.userCategory', 'User')}</div>
 
-          {/* Singer 子分類 */}
-          {singers.length > 0 && (
-            <>
-              <div className={styles.subCategoryTitle}>{t('sidebar.singerCategory', 'Singer')}</div>
-              {singers.map(renderUserItem)}
-            </>
-          )}
+          <div className={styles.searchContainer}>
+            <SearchBar 
+              value={userSearchQuery}
+              onChange={setUserSearchQuery}
+              candidates={allUsers}
+              placeholder={t('sidebar.searchUser', 'ユーザー名で検索...')}
+              onSelect={(val) => handleToggleUser(val)}
+            />
+          </div>
 
-          {/* Player 子分類 */}
-          {players.length > 0 && (
-            <>
-              <div className={styles.subCategoryTitle}>{t('sidebar.playerCategory', 'Player')}</div>
-              {players.map(renderUserItem)}
-            </>
-          )}
+          {filteredUsers.map(renderUserItem)}
 
-          {singers.length === 0 && players.length === 0 && (
-            <div style={{ padding: '0 20px 8px', color: 'var(--text-sub)', fontSize: '0.9em' }}>
+          {allUsers.length === 0 && (
+            <div className={styles.loadingState}>
               {t('loading')}
             </div>
           )}
 
           {/* ── Tool 大類 ── */}
-          <div className={styles.categoryTitle} style={{ marginTop: 20 }}>
+          <div className={`${styles.categoryTitle} ${styles.toolCategory}`}>
             {t('sidebar.toolCategory', 'Tool')}
           </div>
           <button

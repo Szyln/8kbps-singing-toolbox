@@ -1,14 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SongItem } from '../../../../types/Song';
+import { isFuzzyMatch } from '../../../../utils/search';
 import styles from './SearchBar.module.css';
 
 interface SearchBarProps {
   value: string;
   onChange: (val: string) => void;
-  viewMode: 'genre' | 'completion';
-  onToggleViewMode: () => void;
-  candidates: SongItem[];
+  placeholder?: string;
+  viewMode?: 'genre' | 'completion';
+  onToggleViewMode?: () => void;
+  candidates: (SongItem | string)[];
+  onSelect?: (val: string) => void;
 }
 
 export default function SearchBar({
@@ -16,7 +19,9 @@ export default function SearchBar({
   onChange,
   viewMode,
   onToggleViewMode,
-  candidates
+  candidates,
+  placeholder,
+  onSelect
 }: SearchBarProps) {
   const { t } = useTranslation();
   const [showDropdown, setShowDropdown] = useState(false);
@@ -39,10 +44,21 @@ export default function SearchBar({
 
   const handleSelect = (title: string) => {
     onChange(title);
+    if (onSelect) onSelect(title);
     setShowDropdown(false);
   };
 
-  const displayCandidates = candidates.slice(0, 50);
+  const displayCandidates = useMemo(() => {
+    if (!value.trim()) return [];
+    return candidates
+      .filter(item => {
+        const isString = typeof item === 'string';
+        const title = isString ? item : (item['曲名']?.text || '');
+        const author = isString ? '' : (item['作者']?.text || '');
+        return isFuzzyMatch(title, value) || isFuzzyMatch(author, value);
+      })
+      .slice(0, 50);
+  }, [candidates, value]);
 
   return (
     <div className={styles.searchBarContainer}>
@@ -53,28 +69,33 @@ export default function SearchBar({
           value={value}
           onChange={handleInput}
           onFocus={() => setShowDropdown(true)}
-          placeholder={t('searchPlaceholder', '曲名、作者で検索...')}
+          placeholder={placeholder || t('searchPlaceholder', '曲名、作者で検索...')}
           autoComplete="off"
         />
         <div className={`${styles.candidatesDropdown} ${showDropdown && value && displayCandidates.length > 0 ? styles.show : ''}`}>
-          {displayCandidates.map((song, i) => {
-            const title = song['曲名']?.text || '';
-            const author = song['作者']?.text || '';
+          {displayCandidates.map((item, i) => {
+            const isString = typeof item === 'string';
+            const title = isString ? item : (item['曲名']?.text || '');
+            const author = isString ? '' : (item['作者']?.text || '');
             return (
               <div key={i} className={styles.candidateItem} onClick={() => handleSelect(title)}>
-                <span className="candidate-title">{title}</span>
-                <span className="candidate-author" style={{ marginLeft: 8, fontSize: '0.9em', color: 'var(--text-sub)' }}>
-                  <span className="material-symbols-outlined" style={{ fontSize: 14 }}>person</span> {author}
-                </span>
+                <div className={styles.candidateTitle}>{title}</div>
+                {!isString && author && (
+                  <div className={styles.candidateAuthor}>
+                    <span className="material-symbols-outlined">person</span> {author}
+                  </div>
+                )}
               </div>
             );
           })}
         </div>
       </div>
-      <button className={styles.viewToggleBtn} onClick={onToggleViewMode}>
-        <span className="material-symbols-outlined">swap_horiz</span>
-        <span>{viewMode === 'genre' ? t('switchToCompletion', '完成度別へ') : t('switchToGenre', 'ジャンル別へ')}</span>
-      </button>
+      {viewMode && onToggleViewMode && (
+        <button className={styles.viewToggleBtn} onClick={onToggleViewMode}>
+          <span className="material-symbols-outlined">swap_horiz</span>
+          <span>{viewMode === 'genre' ? t('switchToCompletion', '完成度別へ') : t('switchToGenre', 'ジャンル別へ')}</span>
+        </button>
+      )}
     </div>
   );
 }

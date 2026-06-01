@@ -35,6 +35,19 @@
   transform: translateX(320px);
 }
 
+@media (max-width: 480px) {
+  .navDrawer {
+    width: 100%;
+    left: -100%;
+    border-radius: 0;
+    top: 0;
+    max-height: 100vh;
+  }
+  .navDrawer.active {
+    transform: translateX(100%);
+  }
+}
+
 .drawerHeader {
   padding: 20px;
   display: flex;
@@ -42,14 +55,8 @@
   align-items: center;
 }
 
-.drawerTitle {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 0;
-  color: var(--primary-color);
-}
-
 .drawerCloseBtn {
+  font-size: 1.25rem;
   background: transparent;
   border: none;
   color: var(--text-sub);
@@ -72,34 +79,31 @@
 }
 
 .drawerItem {
+  font-size: 1rem;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
+  gap: 10px;
+  padding: 10px;
   text-decoration: none;
   color: var(--text-main);
   border-radius: 12px;
-  margin: 4px 8px;
+  margin: 2px 20px; /* 完美與 header/footer 及搜尋欄的 20px 邊界一線對齊 */
   transition: background 0.2s;
+  width: calc(100% - 40px);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
 
 .drawerItem:hover {
-  background: var(--hover-bg);
+  background-color: var(--hover-bg);
 }
 
 .drawerItem.active {
   background: color-mix(in srgb, var(--primary-color) 12%, transparent);
   color: var(--primary-color);
   font-weight: bold;
-}
-
-/* For button-style drawerItems */
-.drawerItem {
-  width: calc(100% - 16px);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
 }
 
 .drawerFooter {
@@ -177,24 +181,21 @@
   letter-spacing: 0.05em;
 }
 
-.subCategoryTitle {
-  font-size: 0.8em;
-  font-weight: 600;
-  color: var(--text-sub);
-  margin: 8px 28px 2px;
-  opacity: 0.75;
-  letter-spacing: 0.03em;
+.toolCategory {
+  margin-top: 20px;
 }
 
 .userItem {
-  padding: 9px 16px 9px 28px;
+  /* 繼承 drawerItem 邏輯，移除原本多出的 padding */
+  padding-left: 10px;
 }
 
-.userIcon {
-  font-size: 1.1em !important;
-  transition: color 0.15s;
+.searchContainer {
+  padding: 0 20px 12px;
 }
 
-.drawerItem.active .userIcon {
-  color: var(--primary-color);
+.loadingState {
+  padding: 0 20px 8px;
+  color: var(--text-sub);
+  font-size: 0.9em;
 }
