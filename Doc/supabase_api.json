@@ -1,0 +1,1214 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "title": "standard public schema",
+    "version": "14.5"
+  },
+  "host": "isjbouxocljfjavlvovx.supabase.co:443",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "application/vnd.pgrst.object+json;nulls=stripped",
+    "application/vnd.pgrst.object+json",
+    "text/csv"
+  ],
+  "produces": [
+    "application/json",
+    "application/vnd.pgrst.object+json;nulls=stripped",
+    "application/vnd.pgrst.object+json",
+    "text/csv"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "produces": [
+          "application/openapi+json",
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "summary": "OpenAPI description (this document)",
+        "tags": [
+          "Introspection"
+        ]
+      }
+    },
+    "/song_artists": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.song_artists.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.song_artists.artist_id"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/song_artists"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "song_artists"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.song_artists"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "song_artists"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.song_artists.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.song_artists.artist_id"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "song_artists"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.song_artists.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.song_artists.artist_id"
+          },
+          {
+            "$ref": "#/parameters/body.song_artists"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "song_artists"
+        ]
+      }
+    },
+    "/songs": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.songs.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.genre_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.isrc"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.external_ids"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.chord_link"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.medias"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.bpm"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.release_date"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/songs"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "songs"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.songs"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "songs"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.songs.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.genre_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.isrc"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.external_ids"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.chord_link"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.medias"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.bpm"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.release_date"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "songs"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.songs.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.genre_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.isrc"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.external_ids"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.chord_link"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.medias"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.bpm"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.songs.release_date"
+          },
+          {
+            "$ref": "#/parameters/body.songs"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "songs"
+        ]
+      }
+    },
+    "/artists": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.artists.artist_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.artists.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.artists.external_ids"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/artists"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "artists"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.artists"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "artists"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.artists.artist_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.artists.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.artists.external_ids"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "artists"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.artists.artist_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.artists.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.artists.external_ids"
+          },
+          {
+            "$ref": "#/parameters/body.artists"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "artists"
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.users.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.users.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.users.social"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/users"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.users"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.users.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.users.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.users.social"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.users.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.users.name"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.users.social"
+          },
+          {
+            "$ref": "#/parameters/body.users"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/user_songs": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.notes"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.status_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.role_ids"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/range"
+          },
+          {
+            "$ref": "#/parameters/rangeUnit"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/preferCount"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/user_songs"
+              },
+              "type": "array"
+            }
+          },
+          "206": {
+            "description": "Partial Content"
+          }
+        },
+        "tags": [
+          "user_songs"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/body.user_songs"
+          },
+          {
+            "$ref": "#/parameters/select"
+          },
+          {
+            "$ref": "#/parameters/preferPost"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "user_songs"
+        ]
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.notes"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.status_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.role_ids"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "user_songs"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.song_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.user_key"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.notes"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.status_id"
+          },
+          {
+            "$ref": "#/parameters/rowFilter.user_songs.role_ids"
+          },
+          {
+            "$ref": "#/parameters/body.user_songs"
+          },
+          {
+            "$ref": "#/parameters/preferReturn"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "tags": [
+          "user_songs"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "song_artists": {
+      "required": [
+        "song_id",
+        "artist_id"
+      ],
+      "properties": {
+        "song_id": {
+          "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `songs.song_id`.<fk table='songs' column='song_id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "artist_id": {
+          "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `artists.artist_id`.<fk table='artists' column='artist_id'/>",
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "songs": {
+      "required": [
+        "song_id",
+        "name"
+      ],
+      "properties": {
+        "song_id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "format": "text",
+          "type": "string"
+        },
+        "genre_id": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "isrc": {
+          "format": "text",
+          "type": "string"
+        },
+        "external_ids": {
+          "format": "jsonb"
+        },
+        "chord_link": {
+          "format": "text",
+          "type": "string"
+        },
+        "medias": {
+          "format": "text[]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "key": {
+          "format": "text",
+          "type": "string"
+        },
+        "bpm": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "release_date": {
+          "format": "date",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "artists": {
+      "required": [
+        "artist_id",
+        "name"
+      ],
+      "properties": {
+        "artist_id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "format": "text",
+          "type": "string"
+        },
+        "external_ids": {
+          "format": "jsonb"
+        }
+      },
+      "type": "object"
+    },
+    "users": {
+      "required": [
+        "user_id",
+        "name"
+      ],
+      "properties": {
+        "user_id": {
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "format": "text",
+          "type": "string"
+        },
+        "social": {
+          "format": "jsonb"
+        }
+      },
+      "type": "object"
+    },
+    "user_songs": {
+      "required": [
+        "user_song_id",
+        "status_id"
+      ],
+      "properties": {
+        "user_song_id": {
+          "default": "gen_random_uuid()",
+          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_id": {
+          "description": "Note:\nThis is a Foreign Key to `users.user_id`.<fk table='users' column='user_id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "song_id": {
+          "description": "Note:\nThis is a Foreign Key to `songs.song_id`.<fk table='songs' column='song_id'/>",
+          "format": "uuid",
+          "type": "string"
+        },
+        "user_key": {
+          "format": "text",
+          "type": "string"
+        },
+        "notes": {
+          "format": "text",
+          "type": "string"
+        },
+        "status_id": {
+          "format": "integer",
+          "type": "integer"
+        },
+        "role_ids": {
+          "format": "integer[]",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {
+    "preferParams": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "in": "header",
+      "type": "string"
+    },
+    "preferReturn": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "enum": [
+        "return=representation",
+        "return=minimal",
+        "return=none"
+      ],
+      "in": "header",
+      "type": "string"
+    },
+    "preferCount": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "enum": [
+        "count=none"
+      ],
+      "in": "header",
+      "type": "string"
+    },
+    "preferPost": {
+      "name": "Prefer",
+      "description": "Preference",
+      "required": false,
+      "enum": [
+        "return=representation",
+        "return=minimal",
+        "return=none",
+        "resolution=ignore-duplicates",
+        "resolution=merge-duplicates"
+      ],
+      "in": "header",
+      "type": "string"
+    },
+    "select": {
+      "name": "select",
+      "description": "Filtering Columns",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "on_conflict": {
+      "name": "on_conflict",
+      "description": "On Conflict",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "order": {
+      "name": "order",
+      "description": "Ordering",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "range": {
+      "name": "Range",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "header",
+      "type": "string"
+    },
+    "rangeUnit": {
+      "name": "Range-Unit",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "default": "items",
+      "in": "header",
+      "type": "string"
+    },
+    "offset": {
+      "name": "offset",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "limit": {
+      "name": "limit",
+      "description": "Limiting and Pagination",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.song_artists": {
+      "name": "song_artists",
+      "description": "song_artists",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/song_artists"
+      }
+    },
+    "rowFilter.song_artists.song_id": {
+      "name": "song_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.song_artists.artist_id": {
+      "name": "artist_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.songs": {
+      "name": "songs",
+      "description": "songs",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/songs"
+      }
+    },
+    "rowFilter.songs.song_id": {
+      "name": "song_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.name": {
+      "name": "name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.genre_id": {
+      "name": "genre_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.isrc": {
+      "name": "isrc",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.external_ids": {
+      "name": "external_ids",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.chord_link": {
+      "name": "chord_link",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.medias": {
+      "name": "medias",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.key": {
+      "name": "key",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.bpm": {
+      "name": "bpm",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.songs.release_date": {
+      "name": "release_date",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.artists": {
+      "name": "artists",
+      "description": "artists",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/artists"
+      }
+    },
+    "rowFilter.artists.artist_id": {
+      "name": "artist_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.artists.name": {
+      "name": "name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.artists.external_ids": {
+      "name": "external_ids",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.users": {
+      "name": "users",
+      "description": "users",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/users"
+      }
+    },
+    "rowFilter.users.user_id": {
+      "name": "user_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.users.name": {
+      "name": "name",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.users.social": {
+      "name": "social",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "body.user_songs": {
+      "name": "user_songs",
+      "description": "user_songs",
+      "required": false,
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/user_songs"
+      }
+    },
+    "rowFilter.user_songs.user_song_id": {
+      "name": "user_song_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.user_songs.user_id": {
+      "name": "user_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.user_songs.song_id": {
+      "name": "song_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.user_songs.user_key": {
+      "name": "user_key",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.user_songs.notes": {
+      "name": "notes",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.user_songs.status_id": {
+      "name": "status_id",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    },
+    "rowFilter.user_songs.role_ids": {
+      "name": "role_ids",
+      "required": false,
+      "in": "query",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "description": "PostgREST Documentation",
+    "url": "https://postgrest.org/en/v14/references/api.html"
+  }
+}
