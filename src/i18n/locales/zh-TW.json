@@ -20,7 +20,29 @@
     "userCategory": "User",
     "singerCategory": "Singer",
     "playerCategory": "Player",
-    "toolCategory": "Tool"
+    "toolCategory": "Tool",
+    "accountCategory": "帳戶設定",
+    "logout": "安全登出",
+    "login": "登入 / 註冊"
+  },
+  "auth": {
+    "title": "和弦分享工具",
+    "subtitle": "編輯個人曲目、轉調與樂器偏好",
+    "googleBtn": "使用 Google 帳號登入",
+    "or": "或使用電子郵件",
+    "tabLogin": "帳號登入",
+    "tabRegister": "註冊新帳號",
+    "email": "電子郵件",
+    "password": "密碼",
+    "confirmPassword": "確認密碼",
+    "loading": "處理中...",
+    "btnSubmitLogin": "安全登入",
+    "btnSubmitRegister": "建立帳號",
+    "loginSuccess": "登入成功！正在導回...",
+    "registerSuccess": "註冊成功！請至信箱收取驗證信完成開通。",
+    "errorEmptyFields": "請填寫所有欄位！",
+    "errorPasswordMismatch": "密碼與確認密碼不一致！",
+    "errorGeneric": "發生未知錯誤，請稍後再試。"
   },
   "whichLine": {
     "pageTitle": "想在 ChordWiki 等網站上顯示行數嗎？",

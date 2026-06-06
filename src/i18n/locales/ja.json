@@ -20,7 +20,29 @@
     "userCategory": "User",
     "singerCategory": "Singer",
     "playerCategory": "Player",
-    "toolCategory": "Tool"
+    "toolCategory": "Tool",
+    "accountCategory": "アカウント設定",
+    "logout": "ログアウト",
+    "login": "ログイン / 新規登録"
+  },
+  "auth": {
+    "title": "コード共有ツール",
+    "subtitle": "レパートリーの編集・移調・パート設定",
+    "googleBtn": "Google でログイン",
+    "or": "またはメールアドレス",
+    "tabLogin": "ログイン",
+    "tabRegister": "新規登録",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "confirmPassword": "パスワード（確認）",
+    "loading": "処理中...",
+    "btnSubmitLogin": "ログインする",
+    "btnSubmitRegister": "アカウントを作成する",
+    "loginSuccess": "ログインに成功しました！リダイレクト中...",
+    "registerSuccess": "アカウント登録が完了しました！メールを確認してアクティベーションを行ってください。",
+    "errorEmptyFields": "すべての項目を入力してください。",
+    "errorPasswordMismatch": "パスワードが一致しません。",
+    "errorGeneric": "エラーが発生しました。しばらく経ってからやり直してください。"
   },
   "whichLine": {
     "pageTitle": "ChordWiki とかで行数表示したくなりませんか",

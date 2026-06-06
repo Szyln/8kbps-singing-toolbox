@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "",
+    "description": "音樂管理系統 API 核心文件。系統架構採用客觀歌曲資料 (songs) 與主觀個人設定 (user_songs) 分離之設計。歌曲以 UUID 作為系統內部主鍵，獨立的 ISRC 用於防呆與外部平台 (如 Spotify) 關聯，確保系統關聯不可變性與資料純淨度。",
     "title": "standard public schema",
     "version": "14.5"
   },
@@ -758,18 +758,19 @@
   },
   "definitions": {
     "song_artists": {
+      "description": "關聯表：紀錄歌曲與歌手的多對多關係。",
       "required": [
         "song_id",
         "artist_id"
       ],
       "properties": {
         "song_id": {
-          "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `songs.song_id`.<fk table='songs' column='song_id'/>",
+          "description": "客觀歌曲主檔 ID。\nNote:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `songs.song_id`.<fk table='songs' column='song_id'/>",
           "format": "uuid",
           "type": "string"
         },
         "artist_id": {
-          "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `artists.artist_id`.<fk table='artists' column='artist_id'/>",
+          "description": "歌手主檔 ID。\nNote:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `artists.artist_id`.<fk table='artists' column='artist_id'/>",
           "format": "uuid",
           "type": "string"
         }
@@ -777,6 +778,7 @@
       "type": "object"
     },
     "songs": {
+      "description": "客觀歌曲主檔。僅紀錄不可變之音樂客觀資訊 (如原調、BPM、發行資訊)。不包含任何個人自訂值。",
       "required": [
         "song_id",
         "name"
@@ -784,30 +786,36 @@
       "properties": {
         "song_id": {
           "default": "gen_random_uuid()",
-          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "description": "系統內部自動生成的唯一識別碼 (UUID)。不使用 ISRC 作為主鍵，以確保無 ISRC 的地下/原創音樂也能建檔，並維持系統所有關聯紀錄不可變。\nNote:\nThis is a Primary Key.<pk/>",
           "format": "uuid",
           "type": "string"
         },
         "name": {
+          "description": "歌曲名稱 (例如：告白氣球)。",
           "format": "text",
           "type": "string"
         },
         "genre_id": {
+          "description": "曲風分類代碼。",
           "format": "integer",
           "type": "integer"
         },
         "isrc": {
+          "description": "國際標準錄音代碼。作為獨立的唯一欄位，專職處理對外平台 (如 Spotify、Apple Music) 的資料比對，防止具備 ISRC 的商業歌曲被重複寫入。",
           "format": "text",
           "type": "string"
         },
         "external_ids": {
+          "description": "外部串流平台的 ID 集合。格式為 JSONB，例如: {\"spotify\": \"46gOuHGsd3...\"}。",
           "format": "jsonb"
         },
         "chord_link": {
+          "description": "外部和弦譜或樂譜連結。",
           "format": "text",
           "type": "string"
         },
         "medias": {
+          "description": "相關媒體資源 (如 YouTube 連結或音檔 URL) 陣列。",
           "format": "text[]",
           "items": {
             "type": "string"
@@ -815,14 +823,17 @@
           "type": "array"
         },
         "key": {
+          "description": "客觀的歌曲原調 (例如: C Major)。若要存取使用者的主觀轉調設定，請參考 user_songs 表格中的 user_key。",
           "format": "text",
           "type": "string"
         },
         "bpm": {
+          "description": "歌曲的客觀速度 (Tempo)。",
           "format": "integer",
           "type": "integer"
         },
         "release_date": {
+          "description": "發行日期。Spotify 回傳格式可能為精確日期 (YYYY-MM-DD) 或僅有年份 (YYYY)。",
           "format": "date",
           "type": "string"
         }
@@ -830,6 +841,7 @@
       "type": "object"
     },
     "artists": {
+      "description": "歌手/樂團主檔。",
       "required": [
         "artist_id",
         "name"
@@ -842,37 +854,43 @@
           "type": "string"
         },
         "name": {
+          "description": "歌手或樂團名稱。",
           "format": "text",
           "type": "string"
         },
         "external_ids": {
+          "description": "外部平台的歌手 ID (例如 Spotify Artist ID)，格式為 JSONB。",
           "format": "jsonb"
         }
       },
       "type": "object"
     },
     "users": {
+      "description": "使用者資料表。",
       "required": [
         "user_id",
         "name"
       ],
       "properties": {
         "user_id": {
-          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "description": "使用者的唯一識別碼 (與 Supabase Auth 系統綁定)。\nNote:\nThis is a Primary Key.<pk/>",
           "format": "uuid",
           "type": "string"
         },
         "name": {
+          "description": "使用者名稱或暱稱。",
           "format": "text",
           "type": "string"
         },
         "social": {
+          "description": "社群連結或個人資訊 (JSONB)。",
           "format": "jsonb"
         }
       },
       "type": "object"
     },
     "user_songs": {
+      "description": "使用者個人歌單與主觀設定關聯表。所有與特定使用者相關的偏好 (轉調、筆記、角色) 皆記錄於此。",
       "required": [
         "user_song_id",
         "status_id"
@@ -880,33 +898,37 @@
       "properties": {
         "user_song_id": {
           "default": "gen_random_uuid()",
-          "description": "Note:\nThis is a Primary Key.<pk/>",
+          "description": "此筆個人歌單紀錄的唯一識別碼。\nNote:\nThis is a Primary Key.<pk/>",
           "format": "uuid",
           "type": "string"
         },
         "user_id": {
-          "description": "Note:\nThis is a Foreign Key to `users.user_id`.<fk table='users' column='user_id'/>",
+          "description": "綁定之使用者 ID。\nNote:\nThis is a Foreign Key to `users.user_id`.<fk table='users' column='user_id'/>",
           "format": "uuid",
           "type": "string"
         },
         "song_id": {
-          "description": "Note:\nThis is a Foreign Key to `songs.song_id`.<fk table='songs' column='song_id'/>",
+          "description": "關聯之客觀歌曲主檔 ID。\nNote:\nThis is a Foreign Key to `songs.song_id`.<fk table='songs' column='song_id'/>",
           "format": "uuid",
           "type": "string"
         },
         "user_key": {
+          "description": "使用者的個人主觀轉調設定 (例如: +2, -1)。",
           "format": "text",
           "type": "string"
         },
         "notes": {
+          "description": "使用者針對這首歌的個人筆記 (例如: 注意前奏進歌點、吉他效果器設定)。",
           "format": "text",
           "type": "string"
         },
         "status_id": {
+          "description": "歌曲目前的練習或準備狀態代碼 (例如: 1 代表練習中)。",
           "format": "integer",
           "type": "integer"
         },
         "role_ids": {
+          "description": "使用者在這首歌中擔任的角色或樂器代碼陣列 (例如: [1, 2] 代表主唱與吉他)。",
           "format": "integer[]",
           "items": {
             "type": "integer"

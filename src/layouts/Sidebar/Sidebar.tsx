@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSongs } from '../../hooks/useSongs';
+import { useAuth } from '../../App';
 import SearchBar from '../../features/SongManager/components/SearchBar/SearchBar';
 import {
   extractUsersFromSongs,
@@ -25,6 +26,7 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout } = useAuth() as any;
   const { data: songs } = useSongs();
   const [userSearchQuery, setUserSearchQuery] = useState('');
 
@@ -156,6 +158,40 @@ export default function Sidebar({ isOpen, onClose, currentUserIds = [] }: Sideba
             <span className="material-symbols-outlined">format_list_numbered</span>
             <span>{t('sidebar.menuTool', '行數工具')}</span>
           </button>
+
+          {/* ── Account 大類 ── */}
+          <div className={`${styles.categoryTitle} ${styles.toolCategory}`}>
+            {t('sidebar.accountCategory', 'Account')}
+          </div>
+          {user ? (
+            <div className={styles.accountWrapper}>
+              <div className={styles.userProfile}>
+                <span className="material-symbols-outlined">account_circle</span>
+                <span className={styles.userEmail} title={user.email}>
+                  {user.email?.split('@')[0]}
+                </span>
+              </div>
+              <button
+                className={styles.logoutBtn}
+                onClick={async () => {
+                  await logout();
+                  navigate('/');
+                  onClose();
+                }}
+              >
+                <span className="material-symbols-outlined">logout</span>
+                <span>{t('sidebar.logout', '登出')}</span>
+              </button>
+            </div>
+          ) : (
+            <button
+              className={`${styles.drawerItem} ${location.pathname === '/auth' ? styles.active : ''}`}
+              onClick={() => { navigate('/auth'); onClose(); }}
+            >
+              <span className="material-symbols-outlined">login</span>
+              <span>{t('sidebar.login', '登入 / 註冊')}</span>
+            </button>
+          )}
         </div>
 
         {/* Footer: social + theme + lang */}
