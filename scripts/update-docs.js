@@ -19,7 +19,7 @@ async function fetchDocs() {
     if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
 
     const data = await response.text();
-    fs.writeFileSync('supabase_api.json', data);
+    fs.writeFileSync('./doc/supabase_api.json', data);
     console.log('API 文件更新完成！');
   } catch (error) {
     console.error('更新失敗:', error);
