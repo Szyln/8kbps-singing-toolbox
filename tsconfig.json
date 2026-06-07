@@ -1,7 +1,32 @@
 {
+  "strict": true,
+  "noUnusedLocals": true, // 禁止未使用的變數
+  "noUnusedParameters": true, // 禁止未使用的參數
+  "noImplicitAny": true, // 禁止隱式 any
+  "esModuleInterop": true, // 確保與 CommonJS 套件相容
+  "skipLibCheck": true, // 略過 node_modules 型別檢查，提升編譯速度
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    // ... 其他設定
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ]
+    }
+  }
 }
